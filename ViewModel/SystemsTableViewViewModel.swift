@@ -35,11 +35,9 @@ class SystemsTableViewViewModel: SystemsTableViewViewModelType {
     
     func setButton(id: Int) {
         fromButton = id
-        print(fromButton)
     }
     
     func getButton() -> Int {
-        print("\(fromButton) = from button")
         guard let fromButton = fromButton else { return 3}
         return fromButton
     }

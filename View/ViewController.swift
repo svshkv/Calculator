@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func changeSystemButtonPressed(_ sender: Any) {
-        viewModel?.exchangeSystems(originalButton: originalSystemButton, resultButton: resultSystemButton)
+        viewModel?.exchangeSystems(originalSystemTextField: originalSystemTextField, resultSystemTextField: resultSystemTextfield, originalButton: originalSystemButton, resultButton: resultSystemButton)
     }
     
     @IBAction func originalSystemButtonPressed(_ sender: Any) {
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     @IBAction func calculateButtonPressed(_ sender: Any) {
 
         guard let viewModel = viewModel else { return }
-        viewModel.calculateResult(originalSystemTextField: originalSystemTextField)
+        viewModel.calculateResult(originalSystemTextField: originalSystemTextField, originalButton: originalSystemButton, resultButton: resultSystemButton)
         resultSystemTextfield.text = viewModel.resultSystem
         
     }

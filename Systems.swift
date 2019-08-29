@@ -15,5 +15,16 @@ enum Systems: String {
     case Octal = "Восьмеричная"
     case Decimal = "Десятичная"
     case Hexadecimal = "Шестнадцатиричная"
-    
+
+    init(rawValue: String) {
+        switch rawValue {
+        case "Двоичная": self = .Binary
+        case "Троичная": self = .Ternary
+        case "Восьмеричная": self = .Octal
+        case "Десятичная": self = .Decimal
+        case "Шестнадцатиричная": self = .Hexadecimal
+        default: self = .Binary
+            
+        }
+    }
 }

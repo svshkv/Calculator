@@ -11,12 +11,6 @@ import UIKit
 class SystemsTableViewController: UITableViewController {
 
     var viewModel: SystemsTableViewViewModelType?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 

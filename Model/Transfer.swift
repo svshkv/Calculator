@@ -9,7 +9,9 @@
 import Foundation
 
 struct Transfer {
+    
     var originalSystem: String
     var resultSystem: String
     var date: Date
+    
 }
