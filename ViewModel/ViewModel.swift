@@ -29,7 +29,7 @@ class ViewModel {
             return
         }
         
-        resultSystem = String(describing: Int(numberOriginal)! * 2)
+        resultSystem = String(String(describing: numberOriginal).binaryToOctal)
     }
     
     func exchangeSystems(originalButton: UIButton?, resultButton: UIButton?) -> Void {
@@ -42,5 +42,28 @@ class ViewModel {
         
     }
     
+    func systemsTableViewViewModel() -> SystemsTableViewViewModelType? {
+        return SystemsTableViewViewModel()
+    }
     
+    
+}
+
+extension String {
+    var hexaToInt      : Int    { return Int(strtoul(self, nil, 16))      }
+    var hexaToDouble   : Double { return Double(strtoul(self, nil, 16))   }
+    var hexaToBinary   : String { return String(hexaToInt, radix: 2)      }
+    var decimalToHexa  : String { return String(Int(self) ?? 0, radix: 16)}
+    var decimalToBinary: String { return String(Int(self) ?? 0, radix: 2) }
+    var binaryToDecimalInt    : Int    { return Int(strtoul(self, nil, 2))       }
+    var binaryToDecimalDouble : Double { return Double(strtoul(self, nil, 2))   }
+    var binaryToHexa   : String { return String(binaryToDecimalInt, radix: 16)  }
+    var binaryToOctal  : String { return String(binaryToDecimalInt, radix: 8)  }
+    var binaryToTernary   : String { return String(binaryToDecimalInt, radix: 3)  }
+}
+
+extension Int {
+    var binaryString: String { return String(self, radix: 2)  }
+    var hexaString  : String { return String(self, radix: 16) }
+    var doubleValue : Double { return Double(self) }
 }

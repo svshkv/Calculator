@@ -70,6 +70,7 @@
                                 </state>
                                 <connections>
                                     <action selector="originalSystemButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eci-1g-Q9J"/>
+                                    <segue destination="FBr-ha-a1B" kind="show" identifier="fromOriginal" id="3Xu-65-tWs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Lq-3c-QDP">
@@ -82,6 +83,7 @@
                                 </state>
                                 <connections>
                                     <action selector="resultSystemButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BCA-AP-PIz"/>
+                                    <segue destination="FBr-ha-a1B" kind="show" identifier="fromResult" id="ogA-HO-24r"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TfX-qv-FaR">
@@ -166,6 +168,38 @@
             </objects>
             <point key="canvasLocation" x="1076" y="133.5832083958021"/>
         </scene>
+        <!--Systems Table View Controller-->
+        <scene sceneID="lA9-rH-m5l">
+            <objects>
+                <tableViewController id="FBr-ha-a1B" customClass="SystemsTableViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FOo-pd-VFD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="systemCell" id="Ovg-WK-ocW">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ovg-WK-ocW" id="Ehs-8j-oEr">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="FBr-ha-a1B" id="RQb-80-HL8"/>
+                            <outlet property="delegate" destination="FBr-ha-a1B" id="LLt-pZ-mHm"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="OxZ-KD-5zL" kind="unwind" identifier="unwindSegueToVC" unwindAction="unwindToThisViewControllerWithSegue:" id="vjI-wT-tbU"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oat-N2-DaZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="OxZ-KD-5zL" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1892" y="134"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="FfD-us-ipX">
             <objects>
@@ -188,4 +222,7 @@
     <resources>
         <image name="замена" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ogA-HO-24r"/>
+    </inferredMetricsTieBreakers>
 </document>

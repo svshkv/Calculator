@@ -51,5 +51,25 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func unwindToThisViewController(segue: UIStoryboardSegue) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        if identifier == "fromOriginal" {
+            if let vc = segue.destination as? SystemsTableViewController {
+                guard let viewModel = viewModel else { return }
+                vc.viewModel = viewModel.systemsTableViewViewModel()
+                vc.viewModel!.setButton(id: 0)
+            }
+        } else if identifier == "fromResult" {
+            if let vc = segue.destination as? SystemsTableViewController {
+                guard let viewModel = viewModel else { return }
+                vc.viewModel = viewModel.systemsTableViewViewModel()
+                vc.viewModel!.setButton(id: 1)
+            }
+        }
+    }
 }
 
