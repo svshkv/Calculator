@@ -12,6 +12,13 @@ class SystemsTableViewController: UITableViewController {
 
     var viewModel: SystemsTableViewViewModelType?
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.tableFooterView = UIView()
+        
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return viewModel?.numberOfRows() ?? 0

@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     @IBAction func calculateButtonPressed(_ sender: Any) {
 
         guard let viewModel = viewModel else { return }
-        viewModel.calculateResult(originalSystemTextField: originalSystemTextField, originalButton: originalSystemButton, resultButton: resultSystemButton)
+        viewModel.calculateResult(originalSystemTextField: originalSystemTextField, originalButton: originalSystemButton, resultButton: resultSystemButton, vc: self)
         resultSystemTextfield.text = viewModel.resultSystem
         
     }

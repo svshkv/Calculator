@@ -20,7 +20,7 @@ class ViewModel {
     
     var resultSystem: String?
     
-    func calculateResult(originalSystemTextField: UITextField?, originalButton: UIButton?, resultButton: UIButton?) -> Void {
+    func calculateResult(originalSystemTextField: UITextField?, originalButton: UIButton?, resultButton: UIButton?, vc: UIViewController) -> Void {
         
         guard let originalSystemTextField = originalSystemTextField, let numberOriginal = originalSystemTextField.text, let originalButton = originalButton, let resultButton = resultButton else { return }
         
@@ -29,76 +29,135 @@ class ViewModel {
             return
         }
         
-        let numberString = originalSystemTextField.text
+        var message = ""
         let result = Systems(rawValue: (resultButton.titleLabel?.text)!)
         let original = Systems(rawValue: (originalButton.titleLabel?.text)!)
         
         switch original {
             case .Binary:
+                for i in numberOriginal {
+                    print(i)
+                    if i != "0" && i != "1" {
+                        message = "Двоичное число может содержать только цифры 0 и 1"
+                        break
+                    }
+                }
+                
+                if message != "" {
+                    break
+                }
+                
                 switch result {
                     case .Binary:
-                        resultSystem = numberString
+                        resultSystem = numberOriginal
                     case .Ternary:
-                        resultSystem = numberString?.binaryToTernary
+                        resultSystem = numberOriginal.binaryToTernary
                     case .Octal:
-                        resultSystem = numberString?.binaryToOctal
+                        resultSystem = numberOriginal.binaryToOctal
                     case .Decimal:
-                        resultSystem = numberString?.binaryToDecimalString
+                        resultSystem = numberOriginal.binaryToDecimalString
                     case .Hexadecimal:
-                        resultSystem = numberString?.binaryToHexa
+                        resultSystem = numberOriginal.binaryToHexa
             }
             case .Ternary:
+                
+                for i in numberOriginal {
+                    print(i)
+                    if i != "0" && i != "1" && i != "2" {
+                        message = "Троичное число может содержать только цифры 0, 1 и 2"
+                        break
+                    }
+                }
+                
+                if message != "" {
+                    break
+                }
+                
                 switch result {
                     case .Binary:
-                        resultSystem = numberString?.ternaryToBinary
+                        resultSystem = numberOriginal.ternaryToBinary
                     case .Ternary:
-                        resultSystem = numberString
+                        resultSystem = numberOriginal
                     case .Octal:
-                        resultSystem = numberString?.ternaryToOctal
+                        resultSystem = numberOriginal.ternaryToOctal
                     case .Decimal:
-                        resultSystem = numberString?.ternaryToDecimalString
+                        resultSystem = numberOriginal.ternaryToDecimalString
                     case .Hexadecimal:
-                        resultSystem = numberString?.ternaryToHexa
+                        resultSystem = numberOriginal.ternaryToHexa
             }
             case .Octal:
+                
+                for i in numberOriginal {
+                    print(i)
+                    if i != "0" && i != "1" && i != "2" && i != "3" && i != "4" && i != "5"
+                    && i != "6" && i != "7" {
+                        message = "Восьмеричное число может содержать только цифры 0, 1, 2, 3, 4, 5, 6 и 7"
+                        break
+                    }
+                }
+                
+                if message != "" {
+                    break
+                }
+                
                 switch result {
                 case .Binary:
-                    resultSystem = numberString?.OctalToBinary
+                    resultSystem = numberOriginal.OctalToBinary
                 case .Ternary:
-                    resultSystem = numberString?.OctalToTernary
+                    resultSystem = numberOriginal.OctalToTernary
                 case .Octal:
-                    resultSystem = numberString
+                    resultSystem = numberOriginal
                 case .Decimal:
-                    resultSystem = numberString?.OctalToDecimalString
+                    resultSystem = numberOriginal.OctalToDecimalString
                 case .Hexadecimal:
-                    resultSystem = numberString?.OctalToHexa
+                    resultSystem = numberOriginal.OctalToHexa
             }
             case .Decimal:
                 switch result {
                     case .Binary:
-                    resultSystem = numberString?.decimalToBinary
+                    resultSystem = numberOriginal.decimalToBinary
                     case .Ternary:
-                    resultSystem = numberString?.decimalToTernary
+                    resultSystem = numberOriginal.decimalToTernary
                     case .Octal:
-                    resultSystem = numberString?.decimalToOctal
+                    resultSystem = numberOriginal.decimalToOctal
                     case .Decimal:
-                    resultSystem = numberString
+                    resultSystem = numberOriginal
                     case .Hexadecimal:
-                    resultSystem = numberString?.decimalToHexa
+                    resultSystem = numberOriginal.decimalToHexa
             }
             case .Hexadecimal:
+                
+                for i in numberOriginal {
+                    print(i)
+                    if i != "0" && i != "1" && i != "2" && i != "3" && i != "4" && i != "5"
+                        && i != "6" && i != "7" && i != "8" && i != "9" && i != "a" && i != "b" && i != "c"
+                        && i != "d" && i != "e" && i != "f" && i != "A" && i != "B" && i != "C"
+                        && i != "D" && i != "E" && i != "F" {
+                        message = "Шестнадцатиричное число может содержать только цифры 0 - 9 и буквы aA - fF"
+                        break
+                    }
+                }
+                
+                if message != "" {
+                    break
+                }
                 switch result {
                 case .Binary:
-                    resultSystem = numberString?.hexaToBinary
+                    resultSystem = numberOriginal.hexaToBinary
                 case .Ternary:
-                    resultSystem = numberString?.hexaToTernary
+                    resultSystem = numberOriginal.hexaToTernary
                 case .Octal:
-                    resultSystem = numberString?.hexaToOctal
+                    resultSystem = numberOriginal.hexaToOctal
                 case .Decimal:
-                    resultSystem = numberString?.hexaToString
+                    resultSystem = numberOriginal.hexaToString
                 case .Hexadecimal:
-                    resultSystem = numberString
+                    resultSystem = numberOriginal
             }
+        }
+        
+        if message != "" {
+            showAlert(withMessage: message, vc: vc)
+            message = ""
         }
     }
     
@@ -117,49 +176,20 @@ class ViewModel {
     }
     
     func systemsTableViewViewModel() -> SystemsTableViewViewModelType? {
+        
         return SystemsTableViewViewModel()
+        
+    }
+    
+    func showAlert(withMessage message: String, vc: UIViewController) {
+        
+        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Ок", style: .cancel, handler: nil)
+        alertController.addAction(cancel)
+        vc.present(alertController, animated: true, completion: nil)
+
     }
     
     
 }
 
-extension String {
-    
-    var hexaToInt      : Int    { return Int(strtoul(self, nil, 16))      }
-    var hexaToDouble   : Double { return Double(strtoul(self, nil, 16))   }
-    var hexaToString    : String    { return String(strtoul(self, nil, 16))      }
-    var hexaToBinary   : String { return String(hexaToInt, radix: 2)      }
-    var hexaToTernary   : String { return String(hexaToInt, radix: 3)      }
-    var hexaToOctal   : String { return String(hexaToInt, radix: 8)      }
-    
-    var decimalToHexa  : String { return String(Int(self) ?? 0, radix: 16)}
-    var decimalToBinary: String { return String(Int(self) ?? 0, radix: 2) }
-    var decimalToTernary: String { return String(Int(self) ?? 0, radix: 3) }
-    var decimalToOctal: String { return String(Int(self) ?? 0, radix: 8) }
-    
-    var binaryToDecimalInt    : Int    { return Int(strtoul(self, nil, 2))       }
-    var binaryToDecimalDouble : Double { return Double(strtoul(self, nil, 2))   }
-    var binaryToDecimalString : String { return String(strtoul(self, nil, 2))   }
-    var binaryToHexa   : String { return String(binaryToDecimalInt, radix: 16)  }
-    var binaryToOctal  : String { return String(binaryToDecimalInt, radix: 8)  }
-    var binaryToTernary   : String { return String(binaryToDecimalInt, radix: 3)  }
-    
-    var ternaryToDecimal: Int    { return Int(strtoul(self, nil, 3))      }
-    var ternaryToDecimalString: String    { return String(strtoul(self, nil, 3))      }
-    var ternaryToHexa  : String { return String(ternaryToDecimal, radix: 16)      }
-    var ternaryToBinary: String { return String(ternaryToDecimal, radix: 2)      }
-    var ternaryToOctal: String { return String(ternaryToDecimal, radix: 8)      }
-    
-    var OctalToDecimal: Int    { return Int(strtoul(self, nil, 8))      }
-    var OctalToDecimalString: String    { return String(strtoul(self, nil, 8))      }
-    var OctalToHexa  : String { return String(OctalToDecimal, radix: 16)      }
-    var OctalToBinary: String { return String(OctalToDecimal, radix: 2)      }
-    var OctalToTernary: String { return String(OctalToDecimal, radix: 3)      }
-    
-}
-
-extension Int {
-    var binaryString: String { return String(self, radix: 2)  }
-    var hexaString  : String { return String(self, radix: 16) }
-    var doubleValue : Double { return Double(self) }
-}
