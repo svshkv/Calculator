@@ -15,7 +15,8 @@ class TableViewCellViewModel: TableViewCellViewModelType {
     }
     
     var date: String {
-        return String(describing: transfer.date)
+        let toIndex = transfer.date.index(transfer.date.startIndex, offsetBy: 4)
+        return String(transfer.date[...toIndex])
     }
     
     private var transfer: Transfer

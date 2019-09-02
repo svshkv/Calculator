@@ -26,5 +26,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return tableViewCell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            StorageManager.deleteObject(transferObject: (viewModel?.transfers[indexPath.row])!)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     
 }

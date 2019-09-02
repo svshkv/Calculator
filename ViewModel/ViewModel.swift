@@ -8,14 +8,39 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class ViewModel {
     
-    var transfers = [Transfer(originalSystem: "двоичная", resultSystem: "десятичная", date: Date()),
-                     Transfer(originalSystem: "троичная", resultSystem: "десятичная", date: Date())]
+    var transfers = realm.objects(Transfer.self)
     
+    func getData() {
+        
+        transfers = realm.objects(Transfer.self)
+        
+    }
     func tableViewViewModel(tableView: UITableView) -> TableViewViewModelType? {
+        
         return TableViewViewModel(transfers: transfers)
+        
+    }
+    
+    func saveTransfer(originalSystemTextField: UITextField, resultSystemTextfield: UITextField) {
+        
+        if resultSystemTextfield.text != "" {
+            let calendar = Calendar.current
+            let time = calendar.dateComponents([.hour,.minute,.second], from: Date())
+            let fullDate = "\(time.hour!):\(time.minute!):\(time.second!)"
+            let transfer = Transfer(originalSystem: originalSystemTextField.text!, resultSystem: resultSystemTextfield.text!, date: fullDate)
+            
+            if transfers.count > 10 {
+                StorageManager.deleteObject(transferObject: transfers.last!)
+                StorageManager.saveObject(transferObject: transfer)
+            } else {
+                StorageManager.saveObject(transferObject: transfer)
+            }
+        }
+        
     }
     
     var resultSystem: String?
@@ -113,6 +138,20 @@ class ViewModel {
                     resultSystem = numberOriginal.OctalToHexa
             }
             case .Decimal:
+                
+                for i in numberOriginal {
+                    print(i)
+                    if i != "0" && i != "1" && i != "2" && i != "3" && i != "4" && i != "5"
+                        && i != "6" && i != "7" && i != "8" && i != "9" {
+                        message = "Десятичное число может содержать только цифры 0 - 9"
+                        break
+                    }
+                }
+                
+                if message != "" {
+                    break
+                }
+                
                 switch result {
                     case .Binary:
                     resultSystem = numberOriginal.decimalToBinary

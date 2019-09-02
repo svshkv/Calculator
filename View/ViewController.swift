@@ -49,6 +49,13 @@ class ViewController: UIViewController {
         viewModel.calculateResult(originalSystemTextField: originalSystemTextField, originalButton: originalSystemButton, resultButton: resultSystemButton, vc: self)
         resultSystemTextfield.text = viewModel.resultSystem
         
+        guard let resultSystemTextField = resultSystemTextfield else { return }
+        
+        viewModel.saveTransfer(originalSystemTextField: originalSystemTextField, resultSystemTextfield: resultSystemTextField)
+        
+        viewModel.getData()
+        historyTableView.reloadData()
+        
     }
     
     @IBAction func unwindToThisViewController(segue: UIStoryboardSegue) {

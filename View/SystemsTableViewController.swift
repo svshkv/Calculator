@@ -24,13 +24,12 @@ class SystemsTableViewController: UITableViewController {
         return viewModel?.numberOfRows() ?? 0
         
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "systemCell", for: indexPath)
 
         cell.textLabel?.text = viewModel?.cellForSystemsTableView(indexPath: indexPath)
-
+        
         return cell
     }
     

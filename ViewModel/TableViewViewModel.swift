@@ -8,10 +8,11 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class TableViewViewModel: TableViewViewModelType {
     
-    private let transfers: [Transfer]
+    private let transfers: Results<Transfer>
     
     func cellViewModel(forIndexPath IndexPath: IndexPath) -> TableViewCellViewModelType? {
         let transfer = transfers[IndexPath.row]
@@ -24,7 +25,7 @@ class TableViewViewModel: TableViewViewModelType {
     }
     
     
-    init(transfers: [Transfer]) {
+    init(transfers: Results<Transfer>) {
         self.transfers = transfers
     }
     
