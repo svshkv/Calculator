@@ -19,8 +19,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Qw-Q5-O4L">
-                                <rect key="frame" x="0.0" y="483.5" width="375" height="183.5"/>
+                                <rect key="frame" x="0.0" y="481.5" width="375" height="185.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" red="0.54901960780000003" green="0.074509803920000006" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="bjI-2B-ncb" customClass="TableViewCell" customModule="Calculator" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -97,7 +98,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLU-xI-bnI">
-                                <rect key="frame" x="16" y="404" width="343" height="40"/>
+                                <rect key="frame" x="16" y="402" width="343" height="40"/>
                                 <color key="backgroundColor" red="0.5490196078431373" green="0.074509803921568626" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="oX0-D5-AiH"/>
@@ -120,14 +121,14 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9a2-ty-jGz">
-                                <rect key="frame" x="16" y="255" width="343" height="3"/>
-                                <color key="backgroundColor" red="0.87919904746416833" green="0.87779028348945354" blue="0.90239788111036268" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="16" y="255" width="343" height="1"/>
+                                <color key="backgroundColor" red="0.54901960780000003" green="0.074509803920000006" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="3" id="InC-ge-ha1"/>
+                                    <constraint firstAttribute="height" constant="1" id="InC-ge-ha1"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="История:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0M-XR-v6s">
-                                <rect key="frame" x="16" y="452" width="100" height="23.5"/>
+                                <rect key="frame" x="16" y="450" width="100" height="23.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="sn4-ab-hs5"/>
                                 </constraints>
@@ -136,7 +137,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="Iza-rZ-MXS">
-                                <rect key="frame" x="16" y="266" width="343" height="130"/>
+                                <rect key="frame" x="16" y="264" width="343" height="130"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="PO8-qp-grl"/>
                                 </constraints>
