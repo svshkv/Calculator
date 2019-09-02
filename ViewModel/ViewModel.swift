@@ -25,13 +25,13 @@ class ViewModel {
         
     }
     
-    func saveTransfer(originalSystemTextField: UITextField, resultSystemTextfield: UITextField) {
+    func saveTransfer(originalSystemTextView: UITextView, resultSystemLabel: UILabel) {
         
-        if resultSystemTextfield.text != "" {
+        if resultSystemLabel.text != "" {
             let calendar = Calendar.current
             let time = calendar.dateComponents([.hour,.minute,.second], from: Date())
             let fullDate = "\(time.hour!):\(time.minute!):\(time.second!)"
-            let transfer = Transfer(originalSystem: originalSystemTextField.text!, resultSystem: resultSystemTextfield.text!, date: fullDate)
+            let transfer = Transfer(originalSystem: originalSystemTextView.text!, resultSystem: resultSystemLabel.text!, date: fullDate)
             
             if transfers.count > 10 {
                 StorageManager.deleteObject(transferObject: transfers.last!)
@@ -45,9 +45,9 @@ class ViewModel {
     
     var resultSystem: String?
     
-    func calculateResult(originalSystemTextField: UITextField?, originalButton: UIButton?, resultButton: UIButton?, vc: UIViewController) -> Void {
+    func calculateResult(originalSystemTextView: UITextView?, originalButton: UIButton?, resultButton: UIButton?, vc: UIViewController) -> Void {
         
-        guard let originalSystemTextField = originalSystemTextField, let numberOriginal = originalSystemTextField.text, let originalButton = originalButton, let resultButton = resultButton else { return }
+        guard let originalSystemTextField = originalSystemTextView, let numberOriginal = originalSystemTextField.text, let originalButton = originalButton, let resultButton = resultButton else { return }
         
         if numberOriginal == "" {
             resultSystem = ""
@@ -200,17 +200,17 @@ class ViewModel {
         }
     }
     
-    func exchangeSystems(originalSystemTextField: UITextField?, resultSystemTextField: UITextField?, originalButton: UIButton?, resultButton: UIButton?) -> Void {
+    func exchangeSystems(originalSystemTextView: UITextView?, resultSystemLabel: UILabel?, originalButton: UIButton?, resultButton: UIButton?) -> Void {
         
-        guard let originalButton = originalButton, let resultButton = resultButton, let originalSystemTextField = originalSystemTextField, let resultSystemTextField = resultSystemTextField else { return }
+        guard let originalButton = originalButton, let resultButton = resultButton, let originalSystemTextView = originalSystemTextView, let resultSystemLabel = resultSystemLabel else { return }
         let originalButtonTitle = originalButton.titleLabel?.text
         let resultButtonTitle = resultButton.titleLabel?.text
-        let originalSystemTextFieldText = originalSystemTextField.text
-        let resultSystemTextFieldText = resultSystemTextField.text
+        let originalSystemTextViewText = originalSystemTextView.text
+        let resultSystemLabelText = resultSystemLabel.text
         originalButton.setTitle(resultButtonTitle, for: .normal)
         resultButton.setTitle(originalButtonTitle, for: .normal)
-        originalSystemTextField.text = resultSystemTextFieldText
-        resultSystemTextField.text = originalSystemTextFieldText
+        originalSystemTextView.text = resultSystemLabelText
+        resultSystemLabel.text = originalSystemTextViewText
         
     }
     

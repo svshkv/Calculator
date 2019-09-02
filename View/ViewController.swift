@@ -13,10 +13,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var originalSystemButton: UIButton!
     @IBOutlet weak var resultSystemButton: UIButton!
     @IBOutlet weak var changeSystemsButton: UIButton!
-    @IBOutlet weak var originalSystemTextField: UITextField!
-    @IBOutlet weak var resultSystemTextfield: UITextField!
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var calculateButton: UIButton!
+    @IBOutlet weak var originalSystemTextView: UITextView!
+    @IBOutlet weak var resultSystemLabel: UILabel!
     
     var viewModel: ViewModel?
     
@@ -25,6 +25,19 @@ class ViewController: UIViewController {
         
         viewModel = ViewModel()
         
+        //originalSystemButton.layer.borderWidth = 1
+        originalSystemButton.layer.cornerRadius = 20
+        
+        //resultSystemButton.layer.borderWidth = 1
+        resultSystemButton.layer.cornerRadius = 20
+        
+        //calculateButton.layer.borderWidth = 1
+        calculateButton.layer.cornerRadius = 20
+        
+        //resultSystemLabel.numberOfLines = 0
+        //resultSystemLabel.minimumScaleFactor = 8
+        resultSystemLabel.adjustsFontSizeToFitWidth = true
+        
         historyTableView.tableFooterView = UIView()
         historyTableView.dataSource = self
         historyTableView.delegate = self
@@ -32,7 +45,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func changeSystemButtonPressed(_ sender: Any) {
-        viewModel?.exchangeSystems(originalSystemTextField: originalSystemTextField, resultSystemTextField: resultSystemTextfield, originalButton: originalSystemButton, resultButton: resultSystemButton)
+        viewModel?.exchangeSystems(originalSystemTextView: originalSystemTextView, resultSystemLabel: resultSystemLabel, originalButton: originalSystemButton, resultButton: resultSystemButton)
     }
     
     @IBAction func originalSystemButtonPressed(_ sender: Any) {
@@ -46,12 +59,12 @@ class ViewController: UIViewController {
     @IBAction func calculateButtonPressed(_ sender: Any) {
 
         guard let viewModel = viewModel else { return }
-        viewModel.calculateResult(originalSystemTextField: originalSystemTextField, originalButton: originalSystemButton, resultButton: resultSystemButton, vc: self)
-        resultSystemTextfield.text = viewModel.resultSystem
+        viewModel.calculateResult(originalSystemTextView: originalSystemTextView, originalButton: originalSystemButton, resultButton: resultSystemButton, vc: self)
+        resultSystemLabel.text = viewModel.resultSystem
         
-        guard let resultSystemTextField = resultSystemTextfield else { return }
+        guard let resultSystemTextField = resultSystemLabel else { return }
         
-        viewModel.saveTransfer(originalSystemTextField: originalSystemTextField, resultSystemTextfield: resultSystemTextField)
+        viewModel.saveTransfer(originalSystemTextView: originalSystemTextView, resultSystemLabel: resultSystemTextField)
         
         viewModel.getData()
         historyTableView.reloadData()
