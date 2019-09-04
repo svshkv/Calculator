@@ -15,8 +15,22 @@ class TableViewCellViewModel: TableViewCellViewModelType {
     }
     
     var date: String {
-        let toIndex = transfer.date.index(transfer.date.startIndex, offsetBy: 4)
+        let index = getIndex(date: transfer.date)
+        let toIndex = transfer.date.index(transfer.date.startIndex, offsetBy: index)
         return String(transfer.date[...toIndex])
+    }
+    
+    private func getIndex(date: String) -> Int {
+        var index = 0
+        let transferArr = transfer.date.split(separator: ":")
+        if transferArr[0].count == 1 && transferArr[1].count == 1 {
+            index = 2
+        } else if transferArr[0].count == 2 && transferArr[1].count == 2 {
+            index = 4
+        } else {
+            index = 3
+        }
+        return index
     }
     
     private var transfer: Transfer
