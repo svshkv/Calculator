@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         viewModel = ViewModel()
-        
+        viewModel?.getData()
         //originalSystemButton.layer.borderWidth = 1
         originalSystemButton.layer.cornerRadius = 20
         
@@ -65,6 +65,7 @@ class ViewController: UIViewController {
         guard let resultSystemTextField = resultSystemLabel else { return }
         
         viewModel.saveTransfer(originalSystemTextView: originalSystemTextView, resultSystemLabel: resultSystemTextField)
+        
         
         viewModel.getData()
         historyTableView.reloadData()

@@ -10,12 +10,18 @@ import RealmSwift
 
 class Transfer: Object {
     
+    @objc dynamic var id = 0
     @objc dynamic var originalSystem: String = ""
     @objc dynamic var resultSystem: String = ""
     @objc dynamic var date: String = ""
     
-    convenience init(originalSystem: String, resultSystem: String, date: String) {
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    convenience init(id: Int, originalSystem: String, resultSystem: String, date: String) {
         self.init()
+        self.id = id
         self.originalSystem = originalSystem
         self.resultSystem = resultSystem
         self.date = date

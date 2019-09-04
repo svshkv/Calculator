@@ -12,9 +12,11 @@ import RealmSwift
 
 class TableViewViewModel: TableViewViewModelType {
     
-    private let transfers: Results<Transfer>
+    private let transfers: [Transfer]
     
     func cellViewModel(forIndexPath IndexPath: IndexPath) -> TableViewCellViewModelType? {
+        //let transfersCount = transfers.count
+        //let index = transfersCount - IndexPath.row
         let transfer = transfers[IndexPath.row]
         return TableViewCellViewModel(transfer: transfer)
     }
@@ -25,8 +27,8 @@ class TableViewViewModel: TableViewViewModelType {
     }
     
     
-    init(transfers: Results<Transfer>) {
-        self.transfers = transfers
+    init(transfers: [Transfer]) {
+        self.transfers = transfers.sorted() { $0.id > $1.id }
     }
     
 

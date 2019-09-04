@@ -12,11 +12,11 @@ import RealmSwift
 
 class ViewModel {
     
-    var transfers = realm.objects(Transfer.self)
+    var transfers: [Transfer] = []
     
     func getData() {
         
-        transfers = realm.objects(Transfer.self)
+        transfers = Array(realm.objects(Transfer.self))
         
     }
     func tableViewViewModel(tableView: UITableView) -> TableViewViewModelType? {
@@ -31,14 +31,18 @@ class ViewModel {
             let calendar = Calendar.current
             let time = calendar.dateComponents([.hour,.minute,.second], from: Date())
             let fullDate = "\(time.hour!):\(time.minute!):\(time.second!)"
-            let transfer = Transfer(originalSystem: originalSystemTextView.text!, resultSystem: resultSystemLabel.text!, date: fullDate)
+            var maxId = realm.objects(Transfer.self).map{$0.id}.max() ?? 0
+            let minId = realm.objects(Transfer.self).map{$0.id}.min() ?? 0
+            maxId = maxId + 1
+            let transfer = Transfer(id: maxId, originalSystem: originalSystemTextView.text!, resultSystem: resultSystemLabel.text!, date: fullDate)
             
-            if transfers.count > 10 {
-                StorageManager.deleteObject(transferObject: transfers.last!)
-                StorageManager.saveObject(transferObject: transfer)
-            } else {
-                StorageManager.saveObject(transferObject: transfer)
+            if transfers.count > 9 {
+                StorageManager.deleteObject(transferObject: transfers.filter() { $0.id == minId }.first!)
             }
+            
+            StorageManager.saveObject(transferObject: transfer)
+            
+            //StorageManager.saveObject(transferObject: transfer)
         }
         
     }
